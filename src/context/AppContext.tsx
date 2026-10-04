@@ -59,9 +59,12 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+import { INITIAL_CATEGORIES } from '../data/initialCategories';
+import { INITIAL_MENU } from '../data/initialMenu';
+
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [menu, setMenu] = useState<MenuItem[]>([]);
+  const [categories, setCategories] = useState<Category[]>(INITIAL_CATEGORIES);
+  const [menu, setMenu] = useState<MenuItem[]>(INITIAL_MENU);
   const [orders, setOrders] = useState<Order[]>([]);
   const [settings, setSettings] = useState<AppSettings>(INITIAL_SETTINGS);
 
@@ -71,7 +74,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [excelSync, setExcelSync] = useState<ExcelSyncState>({
     isSaving: false,
     lastSavedAt: new Date().toLocaleTimeString(),
-    message: 'Connected to local Excel backend (FLOW_POS.xlsx)',
+    message: 'Connected to backend',
     graphMessage: null,
   });
 
@@ -86,20 +89,30 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         apiClient.getSettings().catch(() => INITIAL_SETTINGS),
       ]);
 
-      if (cats.length > 0) {
+      if (cats && cats.length > 0) {
         setCategories(cats);
         if (!cats.some((c) => c.categoryId === activeCategory)) {
           setActiveCategory(cats[0].categoryId);
         }
+      } else {
+        setCategories(INITIAL_CATEGORIES);
       }
-      if (menuItems.length > 0) setMenu(menuItems);
-      setOrders(orderItemsList);
+
+      if (menuItems && menuItems.length > 0) {
+        setMenu(menuItems);
+      } else {
+        setMenu(INITIAL_MENU);
+      }
+
+      if (orderItemsList && orderItemsList.length > 0) {
+        setOrders(orderItemsList);
+      }
       if (appSettings) setSettings(appSettings as AppSettings);
 
       setExcelSync({
         isSaving: false,
         lastSavedAt: new Date().toLocaleTimeString(),
-        message: 'FLOW_POS.xlsx synced',
+        message: 'Data loaded successfully',
         graphMessage: null,
       });
     } catch (err) {
@@ -107,6 +120,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setExcelSync((prev) => ({ ...prev, isSaving: false }));
     }
   }, [activeCategory]);
+
 
   useEffect(() => {
     refreshData();

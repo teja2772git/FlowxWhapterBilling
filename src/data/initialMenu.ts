@@ -6,7 +6,7 @@ export const INITIAL_MENU: MenuItem[] = [
   // BURGERS
   {
     itemId: 'item-b1',
-    categoryId: 'cat-burgers',
+    categoryId: 'cat_burgers',
     categoryName: 'BURGERS',
     itemName: 'Classic Veg Burger',
     price: 120,
@@ -17,7 +17,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-b2',
-    categoryId: 'cat-burgers',
+    categoryId: 'cat_burgers',
     categoryName: 'BURGERS',
     itemName: 'Veg Cheese Burger',
     price: 150,
@@ -28,7 +28,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-b3',
-    categoryId: 'cat-burgers',
+    categoryId: 'cat_burgers',
     categoryName: 'BURGERS',
     itemName: 'Crispy Chicken Patty Burger',
     price: 150,
@@ -39,7 +39,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-b4',
-    categoryId: 'cat-burgers',
+    categoryId: 'cat_burgers',
     categoryName: 'BURGERS',
     itemName: 'Chicken Cheese Burger',
     price: 180,
@@ -52,7 +52,7 @@ export const INITIAL_MENU: MenuItem[] = [
   // FRENCH FRIES
   {
     itemId: 'item-f1',
-    categoryId: 'cat-fries',
+    categoryId: 'cat_fries',
     categoryName: 'FRENCH FRIES',
     itemName: 'Regular',
     price: 120,
@@ -63,7 +63,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-f2',
-    categoryId: 'cat-fries',
+    categoryId: 'cat_fries',
     categoryName: 'FRENCH FRIES',
     itemName: 'Loaded Fries (Veg)',
     price: 150,
@@ -74,7 +74,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-f3',
-    categoryId: 'cat-fries',
+    categoryId: 'cat_fries',
     categoryName: 'FRENCH FRIES',
     itemName: 'Loaded Fries (Chicken)',
     price: 200,
@@ -87,7 +87,7 @@ export const INITIAL_MENU: MenuItem[] = [
   // MOMOS
   {
     itemId: 'item-m1',
-    categoryId: 'cat-momos',
+    categoryId: 'cat_momos',
     categoryName: 'MOMOS',
     itemName: 'Veg Steamed Momos',
     price: 120,
@@ -98,7 +98,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-m2',
-    categoryId: 'cat-momos',
+    categoryId: 'cat_momos',
     categoryName: 'MOMOS',
     itemName: 'Paneer Steamed Momos',
     price: 140,
@@ -109,7 +109,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-m3',
-    categoryId: 'cat-momos',
+    categoryId: 'cat_momos',
     categoryName: 'MOMOS',
     itemName: 'Chicken Steamed Momos',
     price: 140,
@@ -120,7 +120,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-m4',
-    categoryId: 'cat-momos',
+    categoryId: 'cat_momos',
     categoryName: 'MOMOS',
     itemName: 'Veg Fried Momos',
     price: 140,
@@ -131,7 +131,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-m5',
-    categoryId: 'cat-momos',
+    categoryId: 'cat_momos',
     categoryName: 'MOMOS',
     itemName: 'Paneer Fried Momos',
     price: 160,
@@ -142,7 +142,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-m6',
-    categoryId: 'cat-momos',
+    categoryId: 'cat_momos',
     categoryName: 'MOMOS',
     itemName: 'Chicken Fried Momos',
     price: 160,
@@ -153,7 +153,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-m7',
-    categoryId: 'cat-momos',
+    categoryId: 'cat_momos',
     categoryName: 'MOMOS',
     itemName: 'Veg Kurkure Momos',
     price: 160,
@@ -164,7 +164,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-m8',
-    categoryId: 'cat-momos',
+    categoryId: 'cat_momos',
     categoryName: 'MOMOS',
     itemName: 'Paneer Kurkure Momos',
     price: 180,
@@ -175,7 +175,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-m9',
-    categoryId: 'cat-momos',
+    categoryId: 'cat_momos',
     categoryName: 'MOMOS',
     itemName: 'Chicken Kurkure Momos',
     price: 180,
@@ -188,7 +188,7 @@ export const INITIAL_MENU: MenuItem[] = [
   // FRIED CHICKEN QUICK BITES
   {
     itemId: 'item-fc1',
-    categoryId: 'cat-fried-chicken',
+    categoryId: 'cat_fried_chicken',
     categoryName: 'FRIED CHICKEN QUICK BITES',
     itemName: 'Chicken Popcorn (10 pcs)',
     price: 180,
@@ -199,7 +199,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-fc2',
-    categoryId: 'cat-fried-chicken',
+    categoryId: 'cat_fried_chicken',
     categoryName: 'FRIED CHICKEN QUICK BITES',
     itemName: 'Chicken Crunchy Bites (10 pcs)',
     price: 180,
@@ -210,7 +210,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-fc3',
-    categoryId: 'cat-fried-chicken',
+    categoryId: 'cat_fried_chicken',
     categoryName: 'FRIED CHICKEN QUICK BITES',
     itemName: 'Chicken Boneless Strips (5 pcs)',
     price: 180,
@@ -221,7 +221,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-fc4',
-    categoryId: 'cat-fried-chicken',
+    categoryId: 'cat_fried_chicken',
     categoryName: 'FRIED CHICKEN QUICK BITES',
     itemName: 'Chicken Wings (4 pcs)',
     price: 180,
@@ -232,7 +232,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-fc5',
-    categoryId: 'cat-fried-chicken',
+    categoryId: 'cat_fried_chicken',
     categoryName: 'FRIED CHICKEN QUICK BITES',
     itemName: 'Chicken Drumsticks (2 pcs)',
     price: 180,
@@ -243,7 +243,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-fc6',
-    categoryId: 'cat-fried-chicken',
+    categoryId: 'cat_fried_chicken',
     categoryName: 'FRIED CHICKEN QUICK BITES',
     itemName: 'Chicken Nuggets (6 pcs)',
     price: 180,
@@ -256,7 +256,7 @@ export const INITIAL_MENU: MenuItem[] = [
   // ROLLS N WRAPS
   {
     itemId: 'item-r1',
-    categoryId: 'cat-rolls',
+    categoryId: 'cat_rolls',
     categoryName: 'ROLLS N WRAPS',
     itemName: 'Veg Roll',
     price: 120,
@@ -267,7 +267,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-r2',
-    categoryId: 'cat-rolls',
+    categoryId: 'cat_rolls',
     categoryName: 'ROLLS N WRAPS',
     itemName: 'Paneer Grilled Roll',
     price: 150,
@@ -278,7 +278,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-r3',
-    categoryId: 'cat-rolls',
+    categoryId: 'cat_rolls',
     categoryName: 'ROLLS N WRAPS',
     itemName: 'Chicken Tikka Grilled Roll',
     price: 180,
@@ -291,7 +291,7 @@ export const INITIAL_MENU: MenuItem[] = [
   // VEG QUICK BITES
   {
     itemId: 'item-v1',
-    categoryId: 'cat-veg-bites',
+    categoryId: 'cat_veg_bites',
     categoryName: 'VEG QUICK BITES',
     itemName: 'Veg Cheese Balls (6 pcs)',
     price: 150,
@@ -302,7 +302,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-v2',
-    categoryId: 'cat-veg-bites',
+    categoryId: 'cat_veg_bites',
     categoryName: 'VEG QUICK BITES',
     itemName: 'Veg Cheese Nuggets (6 pcs)',
     price: 150,
@@ -313,7 +313,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-v3',
-    categoryId: 'cat-veg-bites',
+    categoryId: 'cat_veg_bites',
     categoryName: 'VEG QUICK BITES',
     itemName: 'Veg Nuggets (10 pcs)',
     price: 150,
@@ -324,7 +324,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-v4',
-    categoryId: 'cat-veg-bites',
+    categoryId: 'cat_veg_bites',
     categoryName: 'VEG QUICK BITES',
     itemName: 'Potato Smiles (10 pcs)',
     price: 150,
@@ -337,7 +337,7 @@ export const INITIAL_MENU: MenuItem[] = [
   // SHAWARMAS
   {
     itemId: 'item-s1',
-    categoryId: 'cat-shawarma',
+    categoryId: 'cat_shawarma',
     categoryName: 'SHAWARMAS',
     itemName: 'Chicken Shawarma with Salad',
     price: 150,
@@ -348,7 +348,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-s2',
-    categoryId: 'cat-shawarma',
+    categoryId: 'cat_shawarma',
     categoryName: 'SHAWARMAS',
     itemName: 'Chicken Stuffed Flow Special Shawarma',
     price: 180,
@@ -361,7 +361,7 @@ export const INITIAL_MENU: MenuItem[] = [
   // MOJITOS
   {
     itemId: 'item-mj1',
-    categoryId: 'cat-mojitos',
+    categoryId: 'cat_mojitos',
     categoryName: 'MOJITOS',
     itemName: 'Ocean Blue Mojito',
     price: 100,
@@ -372,7 +372,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-mj2',
-    categoryId: 'cat-mojitos',
+    categoryId: 'cat_mojitos',
     categoryName: 'MOJITOS',
     itemName: 'Green Lemon & Mint Mojito',
     price: 100,
@@ -383,7 +383,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-mj3',
-    categoryId: 'cat-mojitos',
+    categoryId: 'cat_mojitos',
     categoryName: 'MOJITOS',
     itemName: 'Virgin Mojito',
     price: 100,
@@ -396,7 +396,7 @@ export const INITIAL_MENU: MenuItem[] = [
   // DESSERTS
   {
     itemId: 'item-d1',
-    categoryId: 'cat-desserts',
+    categoryId: 'cat_desserts',
     categoryName: 'DESSERTS',
     itemName: 'Maska Bun',
     price: 100,
@@ -407,7 +407,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-d2',
-    categoryId: 'cat-desserts',
+    categoryId: 'cat_desserts',
     categoryName: 'DESSERTS',
     itemName: 'Chocolate Donut',
     price: 80,
@@ -418,7 +418,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-d3',
-    categoryId: 'cat-desserts',
+    categoryId: 'cat_desserts',
     categoryName: 'DESSERTS',
     itemName: 'Plain Donut',
     price: 50,
@@ -429,7 +429,7 @@ export const INITIAL_MENU: MenuItem[] = [
   },
   {
     itemId: 'item-d4',
-    categoryId: 'cat-desserts',
+    categoryId: 'cat_desserts',
     categoryName: 'DESSERTS',
     itemName: 'Flow Special Cakes',
     price: 150,

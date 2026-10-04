@@ -8,7 +8,7 @@ import { ReceiptModal } from '../components/common/ReceiptModal';
 import type { Order } from '../types/order';
 
 export const BillingPage: React.FC = () => {
-  const { menu, activeCategory } = useApp();
+  const { menu, categories, activeCategory } = useApp();
   const [searchQuery, setSearchQuery] = useState('');
   const [recentOrder, setRecentOrder] = useState<Order | null>(null);
 
@@ -17,8 +17,14 @@ export const BillingPage: React.FC = () => {
     if (searchQuery.trim() !== '') {
       return matchesSearch;
     }
-    return item.categoryId === activeCategory;
+    const targetCat = categories.find((c) => c.categoryId === activeCategory);
+    return (
+      item.categoryId === activeCategory ||
+      item.categoryId?.replace(/-/g, '_') === activeCategory?.replace(/-/g, '_') ||
+      (targetCat && item.categoryName?.toUpperCase() === targetCat.categoryName.toUpperCase())
+    );
   });
+
 
   return (
     <div className="flex-1 p-4 md:p-6 flex flex-col md:flex-row gap-6 max-w-7xl mx-auto w-full">
