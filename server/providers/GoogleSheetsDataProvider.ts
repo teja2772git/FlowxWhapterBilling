@@ -9,7 +9,7 @@ import type {
   DailySummaryData,
 } from './DataProvider.js';
 import { ExcelDataProvider } from './ExcelDataProvider.js';
-
+import { sendWhatsAppOrderConfirmation } from '../services/WhatsAppService.js';
 
 export class GoogleSheetsDataProvider implements IDataProvider {
   private fallbackExcelProvider = new ExcelDataProvider();
@@ -20,12 +20,13 @@ export class GoogleSheetsDataProvider implements IDataProvider {
     this.spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID || '1Q-b8I8EwvzlqYetrQeBQFGmbJS58bWip96eKNG59VaM';
     this.webhookUrl =
       process.env.GOOGLE_SHEETS_WEBHOOK_URL ||
-      'https://script.google.com/macros/s/AKfycbxHt64AJqaasmy3zhSwIErqC4CRUD-xjU9WJ9fqlLsSU6Euk0FbBoS3Ry5Rbym2E2CG/exec';
+      'https://script.google.com/macros/s/AKfycbwooBrmiVckKj8DImbceQ-CqXJ7RXQRU0uAgHKS_IRLpwRx9HI8RU8VjVEzhbc8D5c/exec';
     console.log(`[GoogleSheetsDataProvider] Active with Spreadsheet ID: ${this.spreadsheetId}`);
     if (this.webhookUrl) {
       console.log(`[GoogleSheetsDataProvider] Google Webhook URL active for 2-way live writes & WhatsApp automation.`);
     }
   }
+
 
   private async fetchSheetCsv(sheetName: string): Promise<any[]> {
     try {
@@ -154,8 +155,12 @@ export class GoogleSheetsDataProvider implements IDataProvider {
   ): Promise<OrderData> {
     const order = await this.fallbackExcelProvider.createOrder(itemsInput, customerName, customerPhone, discount);
     this.postToWebhook('createOrder', { order });
+    sendWhatsAppOrderConfirmation(order).catch((err) =>
+      console.warn('[GoogleSheetsDataProvider] WhatsApp trigger warning:', err.message)
+    );
     return order;
   }
+
 
   async updateOrder(orderId: string, updates: Partial<OrderData>): Promise<OrderData> {
     const updated = await this.fallbackExcelProvider.updateOrder(orderId, updates);
