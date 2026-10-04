@@ -2,31 +2,67 @@
 
 @layer base {
   :root {
-    --flow-blue-vibrant: #0089e8;
-    --flow-blue-hover: #0077cd;
-    --flow-blue-dark: #00569e;
-    --flow-blue-light: #f0f9ff;
-    --flow-blue-subtle: #e0f2fe;
-    --flow-yellow: #ffd400;
-    --flow-yellow-hover: #ffe24d;
-    --flow-white: #ffffff;
-    --flow-red: #ef4444;
-    --flow-green: #10b981;
+    --font-inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  html, body, #root {
+    font-family: var(--font-inter);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     background-color: #ffffff;
     color: #0f172a;
-    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-    -webkit-font-smoothing: antialiased;
+    font-family: var(--font-inter);
+    font-weight: 400;
+    line-height: 1.5;
   }
 
-  h1, h2, h3, h4, .font-display {
-    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: var(--font-inter);
     font-weight: 800;
-    letter-spacing: 0.01em;
+    letter-spacing: -0.035em;
+  }
+
+  button, input, select, textarea, label, nav, a {
+    font-family: var(--font-inter);
+  }
+
+  button {
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 }
+
+/* Inter Hero Heading Helper Class */
+.hero-heading {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-size: 42px;
+}
+
+@media (min-width: 768px) {
+  .hero-heading {
+    font-size: 60px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-heading {
+    font-size: 76px;
+  }
+}
+
+/* Section Headings */
+.section-heading {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
 
 /* Iconic FLOW Blue & White Checkerboard Banner Pattern */
 .bg-flow-checkerboard {

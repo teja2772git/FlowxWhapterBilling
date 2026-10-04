@@ -2,7 +2,7 @@ import type { AppSettings } from '../types/settings';
 
 export const INITIAL_SETTINGS: AppSettings = {
   restaurantName: 'FLOW',
-  restaurantTagline: 'FLAVOURS ON WHEELS — Food Truck • Café • Catering',
+  restaurantTagline: 'FLAVOURS ON WHEELS',
   currency: 'INR',
   currencySymbol: '₹',
   taxEnabled: false,

@@ -16,12 +16,9 @@ export const Header: React.FC = () => {
           </div>
           <div>
             <div className="flex items-center space-x-3">
-              <h1 className="text-2xl md:text-3xl font-extrabold text-[#0089e8] uppercase tracking-wide">
+              <h1 className="text-2xl md:text-3xl font-extrabold text-[#0089e8] uppercase tracking-tight">
                 {settings.restaurantName}
               </h1>
-              <span className="bg-[#ffd400] text-[#00569e] font-extrabold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
-                POS & KITCHEN DISPLAY
-              </span>
             </div>
             <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mt-0.5">
               {settings.restaurantTagline}
