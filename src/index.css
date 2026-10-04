@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --flow-blue-vibrant: #0089e8;
+    --flow-blue-hover: #0077cd;
+    --flow-blue-dark: #00569e;
+    --flow-blue-light: #f0f9ff;
+    --flow-blue-subtle: #e0f2fe;
+    --flow-yellow: #ffd400;
+    --flow-yellow-hover: #ffe24d;
+    --flow-white: #ffffff;
+    --flow-red: #ef4444;
+    --flow-green: #10b981;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #0f172a;
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Iconic FLOW Blue & White Checkerboard Banner Pattern */
+.bg-flow-checkerboard {
+  background-image: 
+    linear-gradient(45deg, #ffffff 25%, transparent 25%), 
+    linear-gradient(-45deg, #ffffff 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #ffffff 75%), 
+    linear-gradient(-45deg, transparent 75%, #ffffff 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+  background-color: #00247d;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #00247d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffd400;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffe24d;
+}
+
+/* Print specific styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print\:p-0, .print\:p-0 * {
+    visibility: visible;
+  }
+}
