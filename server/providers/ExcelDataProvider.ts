@@ -1,4 +1,4 @@
-import { ExcelService } from '../services/ExcelService';
+import { ExcelService } from '../services/ExcelService.js';
 import type {
   IDataProvider,
   CategoryData,
@@ -8,7 +8,8 @@ import type {
   CustomerData,
   AppSettingsData,
   DailySummaryData,
-} from './DataProvider';
+} from './DataProvider.js';
+
 
 export class ExcelDataProvider implements IDataProvider {
   private excelService = ExcelService.getInstance();

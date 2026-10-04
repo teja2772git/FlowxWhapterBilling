@@ -7,8 +7,9 @@ import type {
   CustomerData,
   AppSettingsData,
   DailySummaryData,
-} from './DataProvider';
-import { ExcelDataProvider } from './ExcelDataProvider';
+} from './DataProvider.js';
+import { ExcelDataProvider } from './ExcelDataProvider.js';
+
 
 export class GoogleSheetsDataProvider implements IDataProvider {
   private fallbackExcelProvider = new ExcelDataProvider();

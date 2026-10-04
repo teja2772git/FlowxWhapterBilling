@@ -2,8 +2,9 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import * as path from 'path';
-import { activeDataProvider } from './providers';
-import { ExcelService } from './services/ExcelService';
+import { activeDataProvider } from './providers/index.js';
+import { ExcelService } from './services/ExcelService.js';
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;

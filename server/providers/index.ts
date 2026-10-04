@@ -1,6 +1,6 @@
-import type { IDataProvider } from './DataProvider';
-import { ExcelDataProvider } from './ExcelDataProvider';
-import { GoogleSheetsDataProvider } from './GoogleSheetsDataProvider';
+import type { IDataProvider } from './DataProvider.js';
+import { ExcelDataProvider } from './ExcelDataProvider.js';
+import { GoogleSheetsDataProvider } from './GoogleSheetsDataProvider.js';
 
 export function createDataProvider(): IDataProvider {
   const providerType = process.env.DATA_PROVIDER || 'excel';
@@ -15,4 +15,5 @@ export function createDataProvider(): IDataProvider {
 }
 
 export const activeDataProvider = createDataProvider();
-export * from './DataProvider';
+export * from './DataProvider.js';
+
