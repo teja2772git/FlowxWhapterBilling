@@ -277,7 +277,12 @@ app.post('/api/backup', (_req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`[FLOW Backend Server] Listening on http://localhost:${PORT}`);
-  console.log(`[FLOW Backend Server] Data Provider: ${process.env.DATA_PROVIDER || 'excel'}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`[FLOW Backend Server] Listening on http://localhost:${PORT}`);
+    console.log(`[FLOW Backend Server] Data Provider: ${process.env.DATA_PROVIDER || 'excel'}`);
+  });
+}
+
+export default app;
+
