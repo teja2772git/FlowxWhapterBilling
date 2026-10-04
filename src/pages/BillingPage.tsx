@@ -25,25 +25,24 @@ export const BillingPage: React.FC = () => {
     );
   });
 
-
   return (
-    <div className="flex-1 p-4 md:p-6 flex flex-col md:flex-row gap-6 max-w-7xl mx-auto w-full">
+    <div className="flex-1 p-3 sm:p-4 md:p-6 flex flex-col lg:flex-row gap-6 max-w-7xl mx-auto w-full min-w-0 overflow-x-hidden">
       {/* Left Column: Category Navigation & Menu Tiles */}
-      <div className="flex-1 flex flex-col space-y-4">
-        {/* Search Input Bar (Section 33 Requirement) */}
-        <div className="relative">
-          <Search className="w-5 h-5 text-[#0089e8] absolute left-3.5 top-3.5" />
+      <div className="flex-1 flex flex-col space-y-4 min-w-0">
+        {/* Search Input Bar */}
+        <div className="relative w-full">
+          <Search className="w-4 h-4 sm:w-5 sm:h-5 text-[#0089e8] absolute left-3.5 top-3.5" />
           <input
             type="text"
             placeholder="🔍 Search burgers, momos, mojitos..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border-2 border-[#0089e8]/30 rounded-2xl pl-11 pr-12 py-3 text-sm text-slate-900 font-bold placeholder-slate-400 focus:outline-none focus:border-[#0089e8] shadow-sm"
+            className="w-full bg-white border-2 border-[#0089e8]/30 rounded-2xl pl-10 sm:pl-11 pr-12 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-900 font-bold placeholder-slate-400 focus:outline-none focus:border-[#0089e8] shadow-sm"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3.5 top-3 text-xs text-[#0089e8] hover:text-[#0077cd] font-extrabold uppercase"
+              className="absolute right-3.5 top-2.5 sm:top-3 text-xs text-[#0089e8] hover:text-[#0077cd] font-extrabold uppercase"
             >
               Clear
             </button>
@@ -54,14 +53,14 @@ export const BillingPage: React.FC = () => {
         {!searchQuery && <CategoryBar />}
 
         {/* Menu Items POS Tiles Grid */}
-        <div className="flex-1 overflow-y-auto min-h-[340px]">
+        <div className="flex-1 overflow-y-auto min-h-[300px]">
           {filteredItems.length === 0 ? (
-            <div className="bg-[#00247d] border-2 border-[#ffd400]/40 rounded-3xl p-12 text-center text-white my-4 shadow-xl">
-              <p className="font-display text-xl text-[#ffd400] uppercase">NO MENU ITEMS FOUND</p>
+            <div className="bg-[#00247d] border-2 border-[#ffd400]/40 rounded-3xl p-8 sm:p-12 text-center text-white my-4 shadow-xl">
+              <p className="font-display text-lg sm:text-xl text-[#ffd400] uppercase">NO MENU ITEMS FOUND</p>
               <p className="text-xs text-white/80 font-bold mt-1">Try selecting another category or adjusting your search query.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 pb-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3.5 sm:gap-4 pb-2">
               {filteredItems.map((item) => (
                 <MenuItemCard key={item.itemId} item={item} />
               ))}
@@ -71,7 +70,7 @@ export const BillingPage: React.FC = () => {
       </div>
 
       {/* Right Column: Cart Panel */}
-      <div className="w-full md:w-96 shrink-0">
+      <div className="w-full lg:w-96 shrink-0 min-w-0">
         <CartPanel onOrderPlaced={(order) => setRecentOrder(order)} />
       </div>
 
