@@ -22,74 +22,78 @@ export const KdsDashboardHeader: React.FC = () => {
   const topPriorityOrder = activeOrders.length > 0 ? activeOrders[0] : null;
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
       {/* Active Orders Card */}
-      <div className="bg-white border-2 border-red-200 p-4 rounded-2xl flex items-center space-x-3.5 shadow-lg">
-        <div className="bg-red-500 text-white p-3 rounded-2xl shadow-sm">
-          <Flame className="w-6 h-6 animate-pulse" />
+      <div className="bg-white border border-slate-200 p-3.5 rounded-xl flex items-center space-x-3 shadow-saas hover:border-sky-300 transition-all">
+        <div className="bg-sky-50 text-sky-600 p-2.5 rounded-lg shrink-0">
+          <Flame className="w-5 h-5 text-sky-500" />
         </div>
-        <div>
-          <div className="text-xs font-extrabold text-red-600 uppercase tracking-wider">
-            ACTIVE ORDERS
+        <div className="min-w-0">
+          <div className="text-xs font-medium text-slate-500 truncate">
+            Active Orders
           </div>
-          <div className="text-3xl font-black text-slate-900">{activeOrders.length}</div>
+          <div className="text-2xl font-bold text-slate-900 leading-tight">
+            {activeOrders.length}
+          </div>
         </div>
       </div>
 
       {/* Completed Today Card */}
-      <div className="bg-white border-2 border-emerald-200 p-4 rounded-2xl flex items-center space-x-3.5 shadow-lg">
-        <div className="bg-emerald-500 text-white p-3 rounded-2xl shadow-sm">
-          <CheckCircle className="w-6 h-6 stroke-[3]" />
+      <div className="bg-white border border-slate-200 p-3.5 rounded-xl flex items-center space-x-3 shadow-saas hover:border-sky-300 transition-all">
+        <div className="bg-emerald-50 text-emerald-600 p-2.5 rounded-lg shrink-0">
+          <CheckCircle className="w-5 h-5 text-emerald-500" />
         </div>
-        <div>
-          <div className="text-xs font-extrabold text-emerald-700 uppercase tracking-wider">
-            COMPLETED TODAY
+        <div className="min-w-0">
+          <div className="text-xs font-medium text-slate-500 truncate">
+            Completed Today
           </div>
-          <div className="text-3xl font-black text-slate-900">
+          <div className="text-2xl font-bold text-slate-900 leading-tight">
             {report.completedOrdersCount}
           </div>
         </div>
       </div>
 
       {/* Total Items Pending Card */}
-      <div className="bg-white border-2 border-sky-200 p-4 rounded-2xl flex items-center space-x-3.5 shadow-md">
-        <div className="bg-[#0089e8] text-white p-3 rounded-2xl font-black shadow-sm">
-          <PackageCheck className="w-6 h-6 stroke-[2.5]" />
+      <div className="bg-white border border-slate-200 p-3.5 rounded-xl flex items-center space-x-3 shadow-saas hover:border-sky-300 transition-all">
+        <div className="bg-sky-50 text-sky-600 p-2.5 rounded-lg shrink-0">
+          <PackageCheck className="w-5 h-5 text-sky-500" />
         </div>
-        <div>
-          <div className="text-xs font-extrabold text-[#0089e8] uppercase tracking-wider">
-            PENDING ITEMS
+        <div className="min-w-0">
+          <div className="text-xs font-medium text-slate-500 truncate">
+            Pending Items
           </div>
-          <div className="text-3xl font-black text-slate-900">{itemsPending}</div>
+          <div className="text-2xl font-bold text-slate-900 leading-tight">
+            {itemsPending}
+          </div>
         </div>
       </div>
 
       {/* Avg Wait Time Card */}
-      <div className="bg-white border-2 border-purple-200 p-4 rounded-2xl flex items-center space-x-3.5 shadow-md">
-        <div className="bg-purple-600 text-white p-3 rounded-2xl shadow-sm">
-          <Clock className="w-6 h-6" />
+      <div className="bg-white border border-slate-200 p-3.5 rounded-xl flex items-center space-x-3 shadow-saas hover:border-sky-300 transition-all">
+        <div className="bg-sky-50 text-sky-600 p-2.5 rounded-lg shrink-0">
+          <Clock className="w-5 h-5 text-sky-500" />
         </div>
-        <div>
-          <div className="text-xs font-extrabold text-purple-700 uppercase tracking-wider">
-            AVG WAIT TIME
+        <div className="min-w-0">
+          <div className="text-xs font-medium text-slate-500 truncate">
+            Avg Wait Time
           </div>
-          <div className="text-3xl font-black text-slate-900">
+          <div className="text-2xl font-bold text-slate-900 leading-tight">
             {report.averageWaitTimeMinutes}m
           </div>
         </div>
       </div>
 
       {/* Current Top Priority Card */}
-      <div className="bg-white border-4 border-[#ffd400] p-4 rounded-2xl flex items-center space-x-3.5 shadow-lg col-span-2 sm:col-span-1">
-        <div className="bg-[#ffd400] text-[#00569e] p-3 rounded-2xl font-black shadow-sm">
-          <Award className="w-6 h-6" />
+      <div className="bg-white border border-sky-300 bg-sky-50/30 p-3.5 rounded-xl flex items-center space-x-3 shadow-saas col-span-2 sm:col-span-1">
+        <div className="bg-sky-500 text-white p-2.5 rounded-lg shrink-0">
+          <Award className="w-5 h-5" />
         </div>
-        <div className="truncate">
-          <div className="text-xs font-extrabold text-[#0089e8] uppercase tracking-wider">
-            TOP PRIORITY #1
+        <div className="min-w-0 truncate">
+          <div className="text-xs font-medium text-sky-700 truncate">
+            Top Priority #1
           </div>
-          <div className="text-2xl font-black text-slate-900 truncate">
-            {topPriorityOrder ? topPriorityOrder.orderNumber : 'QUEUE CLEAR'}
+          <div className="text-xl font-bold text-slate-900 truncate">
+            {topPriorityOrder ? topPriorityOrder.orderNumber : 'Clear'}
           </div>
         </div>
       </div>

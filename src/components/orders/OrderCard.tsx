@@ -33,42 +33,65 @@ export const OrderCard: React.FC<OrderCardProps> = ({
   const level = p?.priorityLevel || 'NORMAL';
   const rank = p?.priorityRank || 0;
 
-  // Priority Visual Hierarchy (Section 15 & 16 Requirement)
-  const priorityBadgeStyle =
-    level === 'CRITICAL'
-      ? 'bg-red-600 text-white border-white shadow-red-500/40'
-      : level === 'HIGH'
-      ? 'bg-orange-500 text-white border-white shadow-orange-500/30'
-      : level === 'MEDIUM'
-      ? 'bg-[#ffd400] text-[#00247d] border-white shadow-[#ffd400]/30'
-      : 'bg-emerald-600 text-white border-white shadow-emerald-500/20';
+  // Status Badge Styling (Section 19 Requirement: Subtle status indicators)
+  const getStatusBadgeStyle = () => {
+    switch (order.status) {
+      case 'IN_PROGRESS':
+        return 'bg-sky-50 text-sky-700 border-sky-200';
+      case 'PENDING':
+        return 'bg-amber-50 text-amber-700 border-amber-200';
+      case 'READY':
+        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      case 'COMPLETED':
+        return 'bg-slate-100 text-slate-600 border-slate-200';
+      case 'CANCELLED':
+        return 'bg-rose-50 text-rose-700 border-rose-200';
+      default:
+        return 'bg-sky-50 text-sky-700 border-sky-200';
+    }
+  };
 
-  const cardBorderStyle =
-    rank === 1
-      ? 'border-4 border-[#ffd400] bg-white shadow-xl scale-[1.01]'
-      : level === 'CRITICAL'
-      ? 'border-4 border-red-500 bg-white shadow-lg'
-      : 'border-2 border-[#0089e8]/20 bg-white hover:border-[#0089e8] shadow-md';
+  const getPriorityBadgeStyle = () => {
+    switch (level) {
+      case 'CRITICAL':
+        return 'bg-rose-50 text-rose-700 border-rose-200 font-semibold';
+      case 'HIGH':
+        return 'bg-amber-50 text-amber-700 border-amber-200 font-semibold';
+      case 'MEDIUM':
+        return 'bg-sky-50 text-sky-700 border-sky-200 font-semibold';
+      default:
+        return 'bg-slate-50 text-slate-600 border-slate-200 font-medium';
+    }
+  };
 
   return (
-    <div className={`rounded-3xl p-5 flex flex-col justify-between space-y-4 transition-all ${cardBorderStyle}`}>
-      {/* Top Row: HUGE Priority Number & Order Header */}
-      <div className="flex items-start justify-between border-b-2 border-slate-100 pb-3 gap-3">
-        <div className="flex items-center space-x-3">
-          {/* HUGE Priority Badge */}
+    <div className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3.5 shadow-saas hover:shadow-saas-hover transition-all">
+      {/* Top Header Row */}
+      <div className="flex items-start justify-between border-b border-slate-100 pb-3 gap-2">
+        <div className="flex items-center space-x-2.5 min-w-0">
           {rank > 0 && (
-            <div className={`text-2xl font-black px-3.5 py-1 rounded-2xl border-2 shadow-sm shrink-0 ${priorityBadgeStyle}`}>
-              #{rank}
-            </div>
+            <span
+              className={`text-xs px-2.5 py-0.5 rounded-full border shrink-0 ${getPriorityBadgeStyle()}`}
+            >
+              #{rank} Priority
+            </span>
           )}
 
-          <div>
-            <h3 className="text-xl font-extrabold text-[#0089e8] uppercase tracking-wide">
-              {order.orderNumber}
-            </h3>
+          <div className="min-w-0">
+            <div className="flex items-center space-x-2">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 truncate">
+                {order.orderNumber}
+              </h3>
+              <span
+                className={`text-[11px] px-2 py-0.5 rounded-md font-semibold border ${getStatusBadgeStyle()}`}
+              >
+                {order.status.replace('_', ' ')}
+              </span>
+            </div>
 
-            <div className="text-xs text-slate-600 mt-0.5 font-bold">
-              Customer: <span className="text-[#0089e8] font-extrabold">{order.customerName || 'Walk-in'}</span>
+            <div className="text-xs text-slate-500 mt-0.5 font-normal truncate">
+              Customer:{' '}
+              <span className="text-slate-800 font-medium">{order.customerName || 'Walk-in'}</span>
               {order.customerPhone && <span className="text-slate-400"> • {order.customerPhone}</span>}
             </div>
           </div>
@@ -76,59 +99,59 @@ export const OrderCard: React.FC<OrderCardProps> = ({
 
         {/* Arrival & Live Waiting Timer */}
         <div className="text-right shrink-0">
-          <div className="text-[11px] text-slate-500 font-bold">
-            Arrived: <span className="text-slate-800 font-extrabold">{formatTime(order.createdAt)}</span>
+          <div className="text-[11px] text-slate-400 font-medium">
+            Arrived {formatTime(order.createdAt)}
           </div>
-          <div className="flex items-center justify-end space-x-1 text-sm font-extrabold text-[#0089e8] mt-0.5">
-            <Clock className="w-4 h-4 text-[#0089e8]" />
-            <span>WAITING {liveWait}</span>
+          <div className="flex items-center justify-end space-x-1 text-xs font-semibold text-sky-600 mt-0.5">
+            <Clock className="w-3.5 h-3.5 text-sky-500" />
+            <span>{liveWait}</span>
           </div>
         </div>
       </div>
 
       {/* Item Completion List */}
-      <div className="space-y-2.5 flex-1">
+      <div className="space-y-2 flex-1">
         {order.items.map((item) => {
           const isItemDone = item.remainingQuantity === 0;
           return (
             <div
               key={item.orderItemId}
-              className={`p-3.5 rounded-2xl border transition-all ${
+              className={`p-2.5 rounded-lg border transition-all ${
                 isItemDone
-                  ? 'bg-slate-50 border-slate-200 opacity-60'
-                  : 'bg-sky-50/60 border-sky-200 hover:border-[#0089e8]'
+                  ? 'bg-slate-50 border-slate-100 opacity-60'
+                  : 'bg-slate-50/60 border-slate-200/80 hover:border-sky-300'
               }`}
             >
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex-1 pr-2">
-                  <div className="font-extrabold text-sm text-[#0089e8] uppercase">
+              <div className="flex items-center justify-between gap-2">
+                <div className="min-w-0 flex-1">
+                  <div className="font-semibold text-xs sm:text-sm text-slate-800 truncate">
                     {item.itemName}
                   </div>
-                  <div className="text-xs text-slate-600 mt-1 font-bold">
-                    <span className="text-slate-900 font-black">{item.quantity}</span> total •{' '}
-                    <span className="text-emerald-600 font-black">{item.completedQuantity}</span> completed •{' '}
-                    <span className="text-[#0089e8] font-black">{item.remainingQuantity}</span> remaining
+                  <div className="text-[11px] text-slate-500 mt-0.5 font-medium">
+                    <span className="text-slate-800 font-semibold">{item.quantity}×</span> •{' '}
+                    <span className="text-emerald-600 font-semibold">{item.completedQuantity}</span> done •{' '}
+                    <span className="text-sky-600 font-semibold">{item.remainingQuantity}</span> left
                   </div>
                   {item.notes && (
-                    <div className="text-xs text-[#0089e8] font-bold italic mt-1">
+                    <div className="text-[11px] text-sky-600 font-normal italic mt-0.5">
                       Note: {item.notes}
                     </div>
                   )}
                 </div>
 
-                {/* Large Item Completion Control */}
+                {/* Item Completion Control */}
                 {!isItemDone ? (
                   <button
                     onClick={() => completeOrderItemUnit(order.orderId, item.orderItemId)}
-                    className="bg-[#ffd400] hover:bg-[#ffe24d] text-[#00569e] font-extrabold text-xs px-3.5 py-2 rounded-xl flex items-center space-x-1.5 shrink-0 transition-transform active:scale-95 shadow-md border border-[#ffd400] uppercase"
+                    className="bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-semibold text-xs px-3 py-1.5 rounded-lg flex items-center space-x-1 shrink-0 transition-all shadow-sm border border-sky-600"
                   >
-                    <Check className="w-4 h-4 stroke-[3]" />
-                    <span>✓ COMPLETE 1</span>
+                    <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+                    <span>Done 1</span>
                   </button>
                 ) : (
-                  <span className="bg-emerald-100 text-emerald-800 font-extrabold text-xs px-3 py-1.5 rounded-xl shrink-0 flex items-center space-x-1 border border-emerald-300">
-                    <Check className="w-4 h-4 stroke-[3]" />
-                    <span>DONE</span>
+                  <span className="bg-emerald-50 text-emerald-700 font-semibold text-xs px-2.5 py-1 rounded-lg shrink-0 flex items-center space-x-1 border border-emerald-200">
+                    <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+                    <span>Done</span>
                   </span>
                 )}
               </div>
@@ -138,18 +161,18 @@ export const OrderCard: React.FC<OrderCardProps> = ({
       </div>
 
       {/* Progress Bar */}
-      <div className="space-y-1.5 pt-2 border-t border-slate-100">
-        <div className="flex justify-between items-center text-xs font-bold">
-          <span className="text-slate-600">
-            Progress: <strong className="text-[#0089e8]">{completedItems} / {totalItems}</strong> items done
+      <div className="space-y-1 pt-2 border-t border-slate-100">
+        <div className="flex justify-between items-center text-xs font-medium">
+          <span className="text-slate-500">
+            Progress: <strong className="text-slate-800">{completedItems}/{totalItems}</strong> items
           </span>
-          <span className="text-[#0089e8] font-extrabold text-sm">
-            {remainingItems} REMAINING
+          <span className="text-sky-600 font-semibold text-xs">
+            {remainingItems} remaining
           </span>
         </div>
-        <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200 p-0.5">
+        <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden border border-slate-200">
           <div
-            className="bg-gradient-to-r from-[#ffd400] to-[#0089e8] h-full transition-all duration-300 rounded-full"
+            className="bg-sky-500 h-full transition-all duration-300 rounded-full"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -158,8 +181,8 @@ export const OrderCard: React.FC<OrderCardProps> = ({
       {/* Footer Controls & Details */}
       <div className="flex items-center justify-between pt-2 border-t border-slate-100">
         <div>
-          <div className="text-[10px] text-slate-400 uppercase font-extrabold">ORDER TOTAL</div>
-          <div className="text-xl font-extrabold text-[#0089e8]">
+          <div className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Total</div>
+          <div className="text-base sm:text-lg font-bold text-slate-900">
             {formatCurrency(order.grandTotal, settings.currencySymbol)}
           </div>
         </div>
@@ -168,19 +191,19 @@ export const OrderCard: React.FC<OrderCardProps> = ({
           {rank > 0 && (
             <button
               onClick={() => onExplainPriority(order)}
-              className="bg-sky-50 hover:bg-sky-100 text-[#0089e8] border border-sky-200 px-3 py-1.5 rounded-xl text-xs font-extrabold uppercase flex items-center space-x-1 transition-colors"
+              className="bg-sky-50 hover:bg-sky-100 text-sky-600 border border-sky-200 px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1 transition-colors"
             >
-              <HelpCircle className="w-4 h-4 text-[#0089e8]" />
-              <span className="hidden sm:inline">WHY PRIORITY?</span>
+              <HelpCircle className="w-3.5 h-3.5 text-sky-500" />
+              <span className="hidden sm:inline">Priority</span>
             </button>
           )}
 
           <button
             onClick={() => onOpenDetails(order)}
-            className="bg-[#0089e8] hover:bg-[#0077cd] text-white px-3.5 py-1.5 rounded-xl text-xs font-extrabold uppercase flex items-center space-x-1 transition-all active:scale-95 border border-[#0077cd] shadow-md"
+            className="bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1 transition-all border border-slate-200"
           >
-            <Eye className="w-4 h-4 stroke-[2.5]" />
-            <span>DETAILS</span>
+            <Eye className="w-3.5 h-3.5 text-slate-500" />
+            <span>Details</span>
           </button>
         </div>
       </div>

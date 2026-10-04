@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Search, Utensils } from 'lucide-react';
+import { Plus, Search } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { CategoryManager } from '../components/menu/CategoryManager';
 import { MenuItemTable } from '../components/menu/MenuItemTable';
@@ -7,23 +7,15 @@ import { ItemFormModal } from '../components/menu/ItemFormModal';
 import type { MenuItem } from '../types/menu';
 
 export const MenuAdminPage: React.FC = () => {
-  const { menu, categories } = useApp();
+  const { menu } = useApp();
 
-  const [selectedCatId, setSelectedCatId] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [itemToEdit, setItemToEdit] = useState<MenuItem | null>(null);
 
   const filteredItems = menu.filter((item) => {
-    const matchesSearch = item.itemName.toLowerCase().includes(searchQuery.toLowerCase());
-    if (searchQuery.trim() !== '') {
-      return matchesSearch;
-    }
-    if (selectedCatId !== 'ALL') {
-      return item.categoryId === selectedCatId;
-    }
-    return true;
+    return item.itemName.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
   const handleCreateNew = () => {
@@ -37,62 +29,60 @@ export const MenuAdminPage: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 p-4 md:p-6 space-y-6 max-w-7xl mx-auto w-full">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="flex-1 p-3 sm:p-4 md:p-6 space-y-5 max-w-7xl mx-auto w-full min-w-0 overflow-x-hidden">
+      {/* Clean Page Title Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <div className="flex items-center space-x-3">
-            <Utensils className="w-7 h-7 text-[#ffd400]" />
-            <h1 className="text-3xl font-black text-white uppercase font-display tracking-wide">
-              MENU MANAGEMENT
-            </h1>
-          </div>
-          <p className="text-xs text-white/90 font-bold uppercase tracking-wider mt-0.5">
-            Prices, items, and categories update Excel persistence immediately.
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+            Menu Management
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 font-normal mt-0.5">
+            Manage items, prices, and categories.
           </p>
         </div>
 
         <button
           onClick={handleCreateNew}
-          className="bg-[#ffd400] hover:bg-[#ffe24d] text-[#00247d] font-black px-5 py-3 rounded-2xl flex items-center space-x-2 transition-transform active:scale-95 shadow-xl border-2 border-white text-xs uppercase tracking-wider font-display"
+          className="bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-semibold px-4 py-2 rounded-lg flex items-center space-x-1.5 transition-all shadow-sm border border-sky-600 text-xs self-start sm:self-auto"
         >
-          <Plus className="w-5 h-5 stroke-[3]" />
-          <span>+ ADD MENU ITEM</span>
+          <Plus className="w-4 h-4" />
+          <span>Add Menu Item</span>
         </button>
       </div>
 
+      {/* Category Manager */}
       <CategoryManager />
 
-      <div className="bg-[#00247d] border-2 border-[#ffd400]/60 p-4 rounded-3xl flex flex-col md:flex-row gap-3 items-center justify-between shadow-xl">
+      {/* Filter & Search Bar */}
+      <div className="bg-white border border-slate-200 p-3.5 rounded-xl shadow-saas flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative flex-1 w-full">
-          <Search className="w-4 h-4 text-[#ffd400] absolute left-3.5 top-3.5" />
+          <Search className="w-4 h-4 text-sky-500 absolute left-3.5 top-3" />
           <input
             type="text"
             placeholder="Search items by name..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#001b63] border border-[#ffd400]/40 rounded-2xl pl-10 pr-4 py-2.5 text-xs text-white font-bold placeholder-white/50 focus:outline-none focus:border-[#ffd400]"
+            className="w-full bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg pl-10 pr-10 py-2 text-xs sm:text-sm text-slate-800 font-medium placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
           />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-2 text-xs text-sky-600 hover:text-sky-700 font-semibold"
+            >
+              Clear
+            </button>
+          )}
         </div>
 
-        <div className="flex items-center space-x-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
-          <span className="text-xs text-[#ffd400] font-black uppercase shrink-0">FILTER CATEGORY:</span>
-          <select
-            value={selectedCatId}
-            onChange={(e) => setSelectedCatId(e.target.value)}
-            className="bg-[#001b63] border border-[#ffd400]/40 text-white font-bold text-xs rounded-2xl px-3.5 py-2.5 focus:outline-none focus:border-[#ffd400]"
-          >
-            <option value="ALL">ALL CATEGORIES ({menu.length} Items)</option>
-            {categories.map((c) => (
-              <option key={c.categoryId} value={c.categoryId}>
-                {c.categoryName} ({menu.filter((m) => m.categoryId === c.categoryId).length})
-              </option>
-            ))}
-          </select>
+        <div className="text-xs text-slate-500 font-medium shrink-0">
+          Showing <strong className="text-slate-900">{filteredItems.length}</strong> items
         </div>
       </div>
 
+      {/* Menu Table */}
       <MenuItemTable items={filteredItems} onEditItem={handleEdit} />
 
+      {/* Item Form Modal */}
       {isFormOpen && (
         <ItemFormModal
           itemToEdit={itemToEdit}

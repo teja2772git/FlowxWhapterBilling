@@ -30,31 +30,31 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
   const navItems = [
     {
       id: 'billing',
-      label: 'BILLING',
+      label: 'Billing',
       icon: ShoppingCart,
       badge: cartItemsCount > 0 ? cartItemsCount : null,
-      badgeColor: 'bg-[#ffd400] text-[#00247d]',
+      badgeColor: 'bg-sky-100 text-sky-700',
     },
     {
       id: 'orders',
-      label: 'ORDERS',
+      label: 'Orders',
       icon: Flame,
       badge: activeOrdersCount > 0 ? activeOrdersCount : null,
-      badgeColor: 'bg-red-500 text-white animate-pulse',
+      badgeColor: 'bg-amber-100 text-amber-800 font-semibold',
     },
     {
       id: 'menu',
-      label: 'MENU',
+      label: 'Menu',
       icon: UtensilsCrossed,
     },
     {
       id: 'reports',
-      label: 'REPORTS',
+      label: 'Reports',
       icon: BarChart3,
     },
     {
       id: 'settings',
-      label: 'SETTINGS',
+      label: 'Settings',
       icon: Settings,
     },
   ];
@@ -63,48 +63,36 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
     <>
       {/* Desktop Navigation Sidebar */}
       <aside
-        className={`hidden md:flex flex-col bg-white border-r-2 border-slate-200 text-slate-800 shrink-0 p-3 space-y-4 shadow-sm transition-all duration-300 ease-in-out ${
-          isCollapsed ? 'w-20' : 'w-64'
+        className={`hidden md:flex flex-col bg-white border-r border-slate-200 text-slate-800 shrink-0 p-3 space-y-4 shadow-saas transition-all duration-300 ease-in-out ${
+          isCollapsed ? 'w-20' : 'w-60'
         }`}
       >
-        {/* Top Brand Tagline Badge */}
-        {!isCollapsed && (
-          <div className="bg-sky-50 border border-sky-200 p-3 rounded-2xl text-center shadow-sm">
-            <div className="text-[#0089e8] font-extrabold text-base tracking-wide uppercase leading-tight">
-              GOOD FOOD GREAT VIBES!
-            </div>
-            <div className="text-[11px] text-slate-600 font-bold uppercase tracking-wider mt-0.5">
-              Let's go with the FLOW!
-            </div>
-          </div>
-        )}
-
         {/* Sidebar Header & Expand/Minimize Toggle Button */}
         <div
           className={`flex items-center ${
             isCollapsed ? 'justify-center' : 'justify-between'
-          } pb-2 border-b border-slate-200`}
+          } pb-2 border-b border-slate-100`}
         >
           {!isCollapsed && (
-            <span className="text-xs font-extrabold text-[#0089e8] uppercase tracking-widest px-1">
-              NAVIGATION
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-1">
+              Menu
             </span>
           )}
           <button
             onClick={toggleCollapse}
             title={isCollapsed ? 'Expand Sidebar' : 'Minimize Sidebar'}
-            className="p-2 rounded-xl text-slate-600 hover:text-[#0089e8] hover:bg-sky-50 transition-all border border-slate-200 shadow-sm active:scale-95"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-sky-600 hover:bg-sky-50 transition-all border border-slate-200 active:scale-95"
           >
             {isCollapsed ? (
-              <ChevronRight className="w-5 h-5 text-[#0089e8]" />
+              <ChevronRight className="w-4 h-4 text-sky-500" />
             ) : (
-              <ChevronLeft className="w-5 h-5 text-[#0089e8]" />
+              <ChevronLeft className="w-4 h-4 text-sky-500" />
             )}
           </button>
         </div>
 
         {/* Navigation Items */}
-        <nav className="space-y-2 flex-1">
+        <nav className="space-y-1.5 flex-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -114,25 +102,25 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
                 onClick={() => setActiveTab(item.id)}
                 title={isCollapsed ? item.label : undefined}
                 className={`w-full flex items-center ${
-                  isCollapsed ? 'justify-center px-2' : 'justify-between px-3.5'
-                } py-3.5 rounded-2xl font-extrabold transition-all duration-200 text-sm tracking-wider uppercase relative group ${
+                  isCollapsed ? 'justify-center px-2' : 'justify-between px-3'
+                } py-2.5 rounded-xl font-semibold transition-all duration-150 text-sm relative group ${
                   isActive
-                    ? 'bg-[#0089e8] text-white shadow-lg shadow-[#0089e8]/30 border-l-4 border-[#ffd400] translate-x-0.5'
-                    : 'text-slate-700 hover:bg-sky-50 hover:text-[#0089e8] border border-transparent'
+                    ? 'bg-sky-50 text-sky-600 font-bold border-l-4 border-sky-500'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 border border-transparent'
                 }`}
               >
-                <div className={`flex items-center ${isCollapsed ? '' : 'space-x-3.5'}`}>
-                  <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-white' : 'text-[#0089e8]'}`} />
+                <div className={`flex items-center ${isCollapsed ? '' : 'space-x-3'}`}>
+                  <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-sky-600' : 'text-slate-400 group-hover:text-slate-600'}`} />
                   {!isCollapsed && <span>{item.label}</span>}
                 </div>
 
                 {item.badge !== null && (
                   <span
-                    className={`text-xs px-2.5 py-0.5 rounded-full font-extrabold shadow-sm ${
+                    className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
                       isCollapsed
                         ? 'absolute -top-1 -right-1 text-[10px] px-1.5 py-0.2 border border-white'
                         : ''
-                    } ${isActive ? 'bg-[#ffd400] text-[#00569e]' : item.badgeColor}`}
+                    } ${isActive ? 'bg-sky-500 text-white' : item.badgeColor}`}
                   >
                     {item.badge}
                   </span>
@@ -144,27 +132,27 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
 
         {/* Bottom Engine Badge */}
         {!isCollapsed ? (
-          <div className="bg-sky-50 border border-sky-200 p-3.5 rounded-2xl text-center space-y-1">
-            <div className="text-[#0089e8] font-extrabold text-xs uppercase tracking-wider flex items-center justify-center space-x-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping mr-1" />
-              <span>SMART QUEUE ENGINE</span>
+          <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl text-left space-y-1">
+            <div className="text-sky-600 font-semibold text-xs flex items-center space-x-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Smart Queue Engine</span>
             </div>
-            <div className="text-[10px] text-slate-500 font-medium">
-              Dynamic priority order sorting active
+            <div className="text-[11px] text-slate-500">
+              Priority sorting active
             </div>
           </div>
         ) : (
           <div
-            className="bg-sky-50 border border-sky-200 p-2.5 rounded-2xl text-center flex items-center justify-center"
+            className="bg-slate-50 border border-slate-200 p-2 rounded-xl text-center flex items-center justify-center"
             title="Smart Queue Engine Active"
           >
-            <span className="w-3 h-3 rounded-full bg-emerald-500 animate-ping" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
           </div>
         )}
       </aside>
 
       {/* Mobile Navigation Bottom Bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t-2 border-slate-200 z-40 px-2 py-2 flex justify-around items-center shadow-xl">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-40 px-2 py-1.5 flex justify-around items-center shadow-lg">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -172,21 +160,21 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`flex flex-col items-center justify-center py-1.5 px-3 rounded-xl transition-all ${
+              className={`flex flex-col items-center justify-center py-1 px-3 rounded-lg transition-all ${
                 isActive
-                  ? 'bg-[#0089e8] text-white font-extrabold shadow-md scale-105'
-                  : 'text-slate-600 hover:text-[#0089e8]'
+                  ? 'bg-sky-50 text-sky-600 font-bold'
+                  : 'text-slate-500 hover:text-slate-800'
               }`}
             >
               <div className="relative">
-                <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-[#0089e8]'}`} />
+                <Icon className={`w-5 h-5 ${isActive ? 'text-sky-600' : 'text-slate-400'}`} />
                 {item.badge !== null && (
-                  <span className="absolute -top-1.5 -right-2.5 text-[10px] bg-[#ffd400] text-[#00569e] px-1.5 py-0.2 rounded-full font-extrabold border border-[#0089e8]">
+                  <span className="absolute -top-1 -right-2 text-[10px] bg-sky-500 text-white px-1.5 py-0.2 rounded-full font-bold">
                     {item.badge}
                   </span>
                 )}
               </div>
-              <span className="text-[10px] font-extrabold uppercase tracking-wider mt-1">{item.label}</span>
+              <span className="text-[11px] font-medium mt-0.5">{item.label}</span>
             </button>
           );
         })}
