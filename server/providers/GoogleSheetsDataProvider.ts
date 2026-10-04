@@ -17,10 +17,12 @@ export class GoogleSheetsDataProvider implements IDataProvider {
 
   constructor() {
     this.spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID || '1Q-b8I8EwvzlqYetrQeBQFGmbJS58bWip96eKNG59VaM';
-    this.webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+    this.webhookUrl =
+      process.env.GOOGLE_SHEETS_WEBHOOK_URL ||
+      'https://script.google.com/macros/s/AKfycbxHt64AJqaasmy3zhSwIErqC4CRUD-xjU9WJ9fqlLsSU6Euk0FbBoS3Ry5Rbym2E2CG/exec';
     console.log(`[GoogleSheetsDataProvider] Active with Spreadsheet ID: ${this.spreadsheetId}`);
     if (this.webhookUrl) {
-      console.log(`[GoogleSheetsDataProvider] Google Webhook URL active for 2-way live writes.`);
+      console.log(`[GoogleSheetsDataProvider] Google Webhook URL active for 2-way live writes & WhatsApp automation.`);
     }
   }
 
